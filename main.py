@@ -1,5 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 from agent import ask
@@ -14,6 +15,11 @@ class ChatRequest(BaseModel):
 
 
 @app.get("/")
+def chat_page():
+    return FileResponse("chat.html")
+
+
+@app.get("/health")
 def health():
     return {"status": "ok", "try": "/ask?q=sab se sasta commercial plot"}
 
